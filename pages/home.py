@@ -17,8 +17,6 @@ class HomePage(ft.View):
 
         self.appbar = AppBar(self.page, self)
 
-        print(f'Home page: {self.page.theme_mode}')
-
         self.title = ft.Text(
             value='Downloader Video YouTube',
             theme_style=ft.TextThemeStyle.DISPLAY_MEDIUM,
