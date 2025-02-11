@@ -1,16 +1,20 @@
 import flet as ft
 from pages.home import HomePage
 from pages.settings import SettingsPage
+from utils.settings_manager import load_settings
 
 def main(page: ft.Page):
+    settings = load_settings()
+
+    page.theme_mode = ft.ThemeMode.DARK if settings.get("theme") == "dark" else ft.ThemeMode.LIGHT
+
     app = HomePage(page)
 
     def route_change(route):
         page.views.clear()
 
         if page.route == "/settings":
-            settings_page = SettingsPage(page, app)
-            page.views.append(settings_page)
+            page.views.append(SettingsPage(page, app))
         else:
             page.views.append(app)
 
