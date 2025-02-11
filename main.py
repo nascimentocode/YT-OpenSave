@@ -7,8 +7,18 @@ def main(page: ft.Page):
 
     def route_change(route):
         page.views.clear()
-        page.views.append(SettingsPage(page, app) if page.route == "/settings" else app)
+
+        if page.route == "/settings":
+            settings_page = SettingsPage(page, app)
+            page.views.append(settings_page)
+        else:
+            page.views.append(app)
+
         page.update()
+
+        # # hasattr() -> Verificando se appbar ja esta na HomePage
+        # if hasattr(app, "appbar") and app.appbar is not None:
+        #     app.appbar.update_icon()
 
     page.on_route_change = route_change
     page.go("/")

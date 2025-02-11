@@ -6,8 +6,11 @@ class SettingsPage(ft.View):
         super().__init__(route="/settings", scroll=ft.ScrollMode.AUTO)
         self.page = page
         self.app = app
+        self.is_dark_mode = self.page.theme_mode == ft.ThemeMode.DARK
 
-        self.appbar = AppBar(self.page, self.app)
+        # self.app.apply_theme(self.page)
+
+        self.appbar = AppBar(self.page)
 
         self.controls = [
             self.appbar,
@@ -20,7 +23,7 @@ class SettingsPage(ft.View):
                         ],
                         spacing=10
                     ),
-                    ft.Switch(label="Modo Escuro", on_change=self.switch_theme),
+                    ft.Switch(label="Modo Escuro", on_change=self.change_theme, value=self.is_dark_mode),
                     ft.ElevatedButton(text="Salvar Configurações", on_click=self.save_settings),
                 ],
                 alignment=ft.MainAxisAlignment.START,
@@ -28,15 +31,14 @@ class SettingsPage(ft.View):
             )
         ]
 
-    def switch_theme(self, e):
-        self.page.theme_mode = (
-            ft.ThemeMode.DARK if self.page.theme_mode == ft.ThemeMode.LIGHT else ft.ThemeMode.LIGHT
-        )
-
-        self.page.update()
+        # if self.page:
+        #     self.appbar.update_icon()
 
     def go_home(self, e):
         self.page.go("/")
+
+    def change_theme(self, e):
+       self.appbar.switch_theme(e)
 
     def save_settings(self, e):
         print("Configurações salvas!")

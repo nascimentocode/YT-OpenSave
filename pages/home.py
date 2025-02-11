@@ -13,9 +13,7 @@ class HomePage(ft.View):
         self.video_downloader = VideoDownloader(self.page, self)
         self.video_info_card = VideoInfoCard(self.page, self)
 
-        self.is_dark_mode = False
-
-        self.appbar = AppBar(self.page, self)
+        self.appbar = AppBar(self.page)
 
         self.title = ft.Text(
             value='Downloader Video YouTube',
@@ -109,8 +107,6 @@ class HomePage(ft.View):
         self.infoDownloadLabel.value = ''
         self.progressDownloadLabel.value = ''
 
-    def switch_theme(self, e):
-        self.page.theme_mode = ft.ThemeMode.DARK if not self.is_dark_mode else ft.ThemeMode.LIGHT
-        self.is_dark_mode = not self.is_dark_mode
-        self.appbar.update_icon(self.is_dark_mode)
-        self.page.update()
+    # def apply_theme(self, target_page):
+    #     target_page.theme_mode = self.page.theme_mode
+    #     target_page.update()
