@@ -8,8 +8,6 @@ class HomePage(ft.View):
         super().__init__(route="/", scroll=ft.ScrollMode.AUTO, padding=50)
         self.page = page
         self.page.title = 'YT OpenSave'
-        self.page.theme_mode = ft.ThemeMode.LIGHT
-
         self.video_downloader = VideoDownloader(self.page, self)
         self.video_info_card = VideoInfoCard(self.page, self)
 
