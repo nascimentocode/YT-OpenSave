@@ -1,13 +1,19 @@
 import json
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEFAULT_DOWNLOAD_PATH = os.path.join(os.path.expanduser("~"), "Downloads")
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
+
+DEFAULT_SETTINGS = {
+    "theme": "light",
+    "download_path": DEFAULT_DOWNLOAD_PATH
+}
 
 def load_settings():
     if not os.path.exists(CONFIG_FILE):
-        return {"theme": "light"}
+        return DEFAULT_SETTINGS
 
     with open(CONFIG_FILE, "r", encoding="utf-8") as file:
            return json.load(file)

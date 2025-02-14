@@ -1,10 +1,13 @@
 import yt_dlp
 import flet as ft
 
+from utils.settings_manager import load_settings
+
 class VideoDownloader:
     def __init__(self, page, app):
         self.page = page
         self.app = app
+        self.settings = load_settings()
 
     def progress_hook(self, d):
         status = d['status']
@@ -31,6 +34,7 @@ class VideoDownloader:
 
     def download_video(self, format_id):
         url = self.app.urlTextField.value
+        download_path = self.settings["download_path"]
         self.app.searchBtn.disabled = True
 
         for row in self.app.video_info_card.availableFormats.rows:
@@ -45,7 +49,7 @@ class VideoDownloader:
             "format": format_id+"+bestaudio",  # Better separate video and audio
             "progress_hooks": [self.progress_hook],  # Call progress_hook at each step
             "merge_output_format": "mp4",  # Merge audio and video in MP4
-            "outtmpl": "%(title)s.%(ext)s",  # File name based on title
+            "outtmpl": f"{download_path}/%(title)s.%(ext)s",  # File name based on title
         }
 
         try:
