@@ -1,11 +1,12 @@
 import json
 import os
-import sys
 
-if getattr(sys, 'frozen', False):
-    BASE_DIR = sys._MEIPASS
+if os.name == 'nt':
+    BASE_DIR = os.path.join(os.getenv('APPDATA'), "YT-OpenSave")
 else:
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    BASE_DIR = os.path.join(os.path.expanduser("~"), ".config", "YT-OpenSave")
+
+os.makedirs(BASE_DIR, exist_ok=True)
 
 CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
 
