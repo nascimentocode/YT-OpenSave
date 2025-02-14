@@ -104,7 +104,3 @@ class HomePage(ft.View):
         self.video_info_card.visible = False
         self.infoDownloadLabel.value = ''
         self.progressDownloadLabel.value = ''
-
-    # def apply_theme(self, target_page):
-    #     target_page.theme_mode = self.page.theme_mode
-    #     target_page.update()
