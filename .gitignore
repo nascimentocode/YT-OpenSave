@@ -1,6 +1,13 @@
 .venv/
 .idea/
 
+# Arquivos gerados pelo PyInstaller
+/dist/
+/build/
+*.spec
+
 __init__.py
 
 config.json
+
+
