@@ -72,10 +72,10 @@ class HomePage(ft.View):
     def show_info(self, e):
         self.reset_progress()
 
-        url = self.urlTextField.value
-        if not url:
+        url = self.urlTextField.value.strip()
+        if not url or not self.video_downloader.is_valid_youtube_url(url):
             self.reset_progress()
-            self.progressDownloadLabel.value = 'Por favor, insira uma URL válida.'
+            self.progressDownloadLabel.value = 'Por favor, insira uma URL válida do Youtube.'
             self.page.update()
             return
 
@@ -93,7 +93,7 @@ class HomePage(ft.View):
             self.video_info_card.visible = True
         else:
             self.reset_progress()
-            self.progressDownloadLabel.value = 'Erro, não é possível baixar esse vídeo'
+            self.progressDownloadLabel.value = 'Não é possível baixar esse vídeo'
 
         self.page.update()
 

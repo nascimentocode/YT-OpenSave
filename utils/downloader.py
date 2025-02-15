@@ -1,5 +1,6 @@
 import yt_dlp
 import flet as ft
+import re
 
 from utils.settings_manager import load_settings
 
@@ -8,6 +9,14 @@ class VideoDownloader:
         self.page = page
         self.app = app
         self.settings = load_settings()
+
+    def is_valid_youtube_url(self, url):
+        youtube_regex = re.compile(
+            r"^(https?://)?(www\.)?"
+            r"(youtube\.com|youtu\.be)/"
+        )
+
+        return bool(youtube_regex.match(url))
 
     def progress_hook(self, d):
         status = d['status']
@@ -26,7 +35,7 @@ class VideoDownloader:
 
     def fetch_video_info(self, url):
         try:
-            with yt_dlp.YoutubeDL() as ydl:
+            with yt_dlp.YoutubeDL({'quiet': True}) as ydl:
                 info = ydl.extract_info(url, download=False)
                 return True, info
         except Exception as err:
