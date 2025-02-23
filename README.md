@@ -4,6 +4,8 @@ YT OpenSave é um aplicativo para baixar vídeos do YouTube de forma simples e g
 
 ## 📌 Funcionalidades
 
+⚠️ **Observação:** O aplicativo foi desenvolvido para ser utilizado em **desktop**. Embora o Flet possa suportar mobile, a responsividade para dispositivos móveis **não foi testada** e pode não estar otimizada.
+
 - 🔗 **Input de URL**: Insira o link do vídeo para obter informações.
 - 📄 **Exibição de Informações**: Um card mostra detalhes do vídeo.
 - 🎞 **Lista de Qualidades Disponíveis**: Exibição das resoluções disponíveis para download.
