@@ -4,7 +4,6 @@ YT OpenSave é um aplicativo para baixar vídeos do YouTube de forma simples e g
 
 ## 📌 Funcionalidades
 
-- 🔄 **Modo Claro/Escuro**: Alterne entre temas para melhor visualização.
 - 🔗 **Input de URL**: Insira o link do vídeo para obter informações.
 - 📄 **Exibição de Informações**: Um card mostra detalhes do vídeo.
 - 🎞 **Lista de Qualidades Disponíveis**: Exibição das resoluções disponíveis para download.
