@@ -22,10 +22,7 @@ class SettingsPage(ft.View):
         self.download_path_text = ft.Text(f"Diretório para download: {self.settings['download_path']}")
 
         self.choose_dir_btn = ft.CupertinoButton(
-            content=ft.Row([
-                ft.Icon(name=ft.Icons.FOLDER_OPEN, color=ft.Colors.WHITE, size=17),
-                # ft.Text(value="Escolher Diretório", color=ft.Colors.WHITE, size=12),
-            ]),
+            content=ft.Icon(name=ft.Icons.FOLDER_OPEN, color=ft.Colors.WHITE, size=17),
             bgcolor='#8b2c1d',
             padding=ft.padding.symmetric(vertical=15, horizontal=30),
             tooltip="Escolher Diretório",
@@ -61,10 +58,13 @@ class SettingsPage(ft.View):
         self.page.go("/")
 
     def choose_directory(self, e):
-        folder_selected = pick_folder()
-        if folder_selected:
-            self.settings["download_path"] = folder_selected
-            self.download_path_text.value = f"Diretório atual: {folder_selected}"
+        selected_folder = pick_folder()
+        if selected_folder:
+            self.settings["download_path"] = selected_folder
+
+            self.app.video_downloader.update_download_path()
+
+            self.download_path_text.value = f"Diretório atual: {selected_folder}"
             self.page.update()
 
     def change_theme(self, e):

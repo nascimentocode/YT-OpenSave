@@ -1,6 +1,6 @@
 import yt_dlp
 import flet as ft
-import re
+import re, os
 
 from utils.settings_manager import load_settings
 
@@ -8,7 +8,7 @@ class VideoDownloader:
     def __init__(self, page, app):
         self.page = page
         self.app = app
-        self.settings = load_settings()
+        self.update_download_path()
 
     def is_valid_youtube_url(self, url):
         youtube_regex = re.compile(
@@ -41,9 +41,16 @@ class VideoDownloader:
         except Exception as err:
             return False, None
 
+    def update_download_path(self):
+        self.settings = load_settings()
+        self.download_path = self.settings["download_path"]
+
+        if not os.path.exists(self.download_path):
+            os.makedirs(self.download_path)
+
     def download_video(self, format_id):
-        url = self.app.urlTextField.value
-        download_path = self.settings["download_path"]
+        url = self.app.urlTextField.value.strip()
+
         self.app.searchBtn.disabled = True
 
         for row in self.app.video_info_card.availableFormats.rows:
@@ -54,11 +61,13 @@ class VideoDownloader:
 
         self.page.update()
 
+        self.update_download_path()
+
         ydl_opts = {
             "format": format_id+"+bestaudio",  # Better separate video and audio
             "progress_hooks": [self.progress_hook],  # Call progress_hook at each step
             "merge_output_format": "mp4",  # Merge audio and video in MP4
-            "outtmpl": f"{download_path}/%(title)s.%(ext)s",  # File name based on title
+            "outtmpl": f"{self.download_path}/%(title)s.%(ext)s",  # File name based on title
         }
 
         try:
