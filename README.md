@@ -56,10 +56,6 @@ Aqui será inserido um vídeo **DEMO** mostrando a utilização do aplicativo.
 - O aplicativo ainda está em desenvolvimento, e melhorias serão adicionadas continuamente.
 - Sugestões e feedbacks são bem-vindos!
 
-## 📜 Licença
-
-Este projeto é de código aberto sob a licença MIT.
-
 ---
 
 ✉️ Para feedbacks ou sugestões, entre em contato!
